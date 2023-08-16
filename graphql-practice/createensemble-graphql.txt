@@ -1,0 +1,412 @@
+💜
+
+mutation CREATE_CIRCLE ($createData: CreateCircleInput!){
+  createCircle(data: $createData) {
+			id
+			createdAt
+  }
+}
+
+
+mutation UPDATE_CIRCLE($updateDate: UpdateCircleInput!){
+  updateCircle(data: $updateDate) {
+			id
+      createdBy
+  }
+}
+
+
+query ALL_CIRCLES (
+		$orderBy: CircleRecordOrder!
+		$query: String
+		$skip: Int
+		$after: String
+		$before: String
+		$first: Int
+		$last: Int
+		$creator: String
+		$moderator: String
+		$isFeatured: Boolean
+) {
+	allCircles(
+		orderBy: $orderBy, 
+		query: $query, 
+		skip: $skip
+		after: $after
+		before: $before
+		first: $first
+		last: $last
+		creator: $creator
+		moderator: $moderator
+		isFeatured: $isFeatured
+	) {
+		edges {
+			cursor
+			node {
+				id
+				slug
+				title
+				logo
+				banner
+				isPublic
+				description
+				isFeatured
+				Creator { id  fullName }
+				Moderators { id  fullName }
+				createdAt
+				createdBy
+				updatedAt
+				deleted
+				createdAt
+				createdBy
+			}
+		}
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+    totalCount
+	}
+}
+
+
+query ONE_CIRCLE($id: String!) {
+	oneCircle (id: $id) {
+				id
+				slug
+				title
+				logo
+				banner
+				isPublic
+				description
+				isFeatured
+				Creator { id  fullName }
+				Moderators { id  fullName }
+				MemberCircles { id  Member { id  fullName  } }
+				Comments { id  body createdAt Author { id  fullName  } }
+				createdAt
+				createdBy
+				updatedAt
+				deleted
+	}
+}
+
+mutation REMOVE_CIRCLE($id: String!) {
+	removeCircle(id: $id) {
+		id 
+		deleted
+		deletedAt
+	}
+}
+
+
+```
+[7/12, 2:53 PM] +234 811 259 1451: *Query Variables*
+
+```
+{
+	"orderBy": {
+		"field": "id",
+		"direction": "desc"
+	},
+	"query": null,
+	"id": "clg0i6iid0b99fbc2kpwpkttk",
+	"updateDate": {
+		"id": "clg0i6iid0b99fbc2kpwpkttk",
+		"title": "Desginers, Graphics Engineers, Sound ENgineers"
+	},
+	"createData": {
+		"creator": "{{_.member}}",
+		"title": "Technologist in Entertainment",
+		"logo": "https://www.youtube.com/",
+		"banner": "https://www.youtube.com/",
+		"isPublic": true,
+		"description": "tech blogs"
+	}
+}
+```
+[7/12, 2:54 PM] +234 811 259 1451: ```
+# mutation SYNC_FRIENDSHIP {
+# 	syncFriendships {
+# 		id
+# 		status
+# 	}
+# }
+
+# query SYNC_MEMBERS{
+#   syncMembers {
+#           id
+# 					slug
+# 					createdAt
+#   }
+# }
+
+
+
+
+
+mutation LOGIN($loginData: LoginInput!) {
+	login(data: $loginData) {
+		accessToken
+		user {
+			id
+			email
+      Member { id fullName slug bio avatar type wallet roles }
+			theme
+			accountStatus
+		}
+    refreshToken
+	}
+}
+
+mutation LOGIN_ADMIN($adminLoginData: LoginInput!) {
+	login(data: $adminLoginData) {
+		accessToken
+		user {
+			id
+			email
+      Member { id fullName slug bio avatar type wallet roles }
+			theme
+			accountStatus
+		}
+    refreshToken
+	}
+}
+
+ 
+mutation UPDATE_USER ($updateData: UpdateUserInput!){
+  updateUser(data: $updateData) {
+			id
+			email
+			phone
+			theme
+			emailVerified
+			phoneVerified
+			provider
+			accountStatus
+			updatedAt
+  }
+}
+
+
+mutation REMOVE_USER ($id: String!) {
+  removeUser(id: $id) {
+		id
+  }
+}
+
+
+mutation DROP_USER ($id: String!) {
+  dropUser(id: $id) {
+		id
+  }
+}
+
+
+
+  query ME {
+    me {
+      id
+      email
+      phone
+      Member {
+        id
+        email
+        fullName
+        roles
+        slug
+        bio
+        type
+        wallet
+        avatar
+        website
+        address
+        coverImage
+        contactEmail
+        contactPhone
+        facebookUrl
+        twitterUrl
+        instagramUrl
+        linkedinUrl
+        ProfileUsers {
+          id
+          User {
+            id
+            email
+          }
+          roles
+        }
+      }
+      ProfileUsers {
+        id
+        Profile {
+          id
+          fullName
+          slug
+          bio
+          avatar
+          type
+          wallet
+          roles
+        }
+        User {
+          email
+        }
+        roles
+      }
+      theme
+      emailVerified
+      phoneVerified
+      provider
+      accountStatus
+    }
+  }
+
+mutation SIGNUP ($signupData: SignupInput!) {
+  signup(data: $signupData) {
+		accessToken
+		user {
+			id
+			email
+			phone
+			theme
+			emailVerified
+			phoneVerified
+			provider
+			accountStatus
+			Member { id fullName slug bio avatar type wallet roles }
+		}
+  }
+}
+
+
+mutation LOGIN_WITH_OTP($otpLoginData: LoginInput!) {
+	login(data: $otpLoginData) {
+		accessToken
+		user {
+			id
+			email
+ 
+		}
+	}
+}
+
+mutation FOLLOW_ADMIN($member: String!) {
+	adminFriendship(id: $member) {
+		id 
+		status
+	}
+}
+
+
+
+
+  query ONE_USER($id: String!) {
+    oneUser (id: $id) {
+            id
+						email
+						phone
+						theme
+						emailVerified
+						phoneVerified
+						provider
+						accountStatus
+						Member { id fullName slug bio avatar type wallet roles }
+						createdAt
+						createdBy
+						updatedAt
+						updatedBy
+						deleted
+						deletedAt
+						deletedBy
+            deleted
+    }
+  }
+
+
+  query ALL_USERS (
+      $orderBy: UserRecordOrder!
+      $query: String
+      $skip: Int
+      $take: Int
+      $after: String
+      $before: String
+      $first: Int
+      $last: Int
+      $member: String
+  ) {
+    allUsers(
+        orderBy: $orderBy,
+        query: $query,
+        skip: $skip
+        take: $take
+        after: $after
+        before: $before
+        first: $first
+        last: $last
+        member: $member
+    ) {
+      edges {
+        cursor
+        node {
+						id
+						email
+						phone
+						theme
+						emailVerified
+						phoneVerified
+						provider
+						accountStatus
+						Member { id fullName slug bio avatar type wallet roles }
+						createdAt
+						createdBy
+						updatedAt
+						updatedBy
+						deleted
+						deletedAt
+						deletedBy
+            deleted
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+      totalCount
+    }
+  }
+```
+[7/12, 2:55 PM] +234 811 259 1451: User Query Variables
+
+```
+{
+	"orderBy": {
+		"field": "id",
+		"direction": "desc"
+	},
+	"id": "{{ _.user.id }}",
+	"member": "{{ _.member }}",
+	"loginData": {
+		"password": "pass1234",
+		"email": "example@gmail.com"
+	},
+	"otpLoginData": {
+		"provider": "OTP",
+		"phone": "+2348167345519",
+		"password": "secret42"
+	},
+	"adminLoginData": {
+		"email": "{{ _.admin.email }}",
+		"password": "secret42"
+	},
+	"updateData": {
+		"id": "{{ _.user.id }}",
+		"phone": "+2348167345519",
+		"theme": "DARK"
+	}
+}
+```

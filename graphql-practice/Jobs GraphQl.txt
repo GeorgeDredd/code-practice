@@ -1,0 +1,149 @@
+query MyData {
+  me {
+    id
+    email
+    Member {
+      id
+      type
+    }
+  }
+}
+
+mutation Signup($email: String!) {
+  signup(data: { email: $email, password: "1revocart", type: ORGANIZATION }) {
+    refreshToken
+    accessToken
+    user {
+      id
+    }
+  }
+}
+
+mutation Login($email: String!) {
+  login(data: { email: $email, password: "1revocart" }) {
+    accessToken
+    refreshToken
+    user {
+      id
+    }
+  }
+}
+
+mutation CreateVerification($email: String!) {
+  createVerification(data: { email: $email, type: EMAIL_SIGNUP }) {
+    code
+    createdAt
+  }
+}
+
+mutation ConfirmVerificationCode($email: String!) {
+  confirmVerification(
+    data: { email: $email, code: "34288", type: EMAIL_SIGNUP }
+  ) {
+    createdAt
+    status
+  }
+}
+
+mutation CreateMember {
+  createMember(
+    data: {
+      fullName: "George Odo"
+      type: ORGANIZATION
+      bio: "My bio"
+      user: ""
+    }
+  ) {
+    id
+  }
+}
+
+mutation CREATE_JOB {
+  createJob(
+    data: {
+      category: "FILM"
+      isInternal: true
+      isPaid: false
+      maxAge: 25
+      minAge: 30
+      mode: HYBRID
+      organizationName: "PMTL"
+      summary: "Nice Job"
+      talent: "Graphic Artist"
+      title: "Artist"
+      employment: INTERN
+      experienceLevel: ENTRY_LEVEL
+    }
+  ) {
+    id
+    createdAt
+  }
+}
+
+query ALL_JOBS {
+  allJobs(orderBy: { direction: desc, field: createdAt }) {
+    totalCount
+    edges {
+      node {
+        id
+        createdAt
+        description
+        slug
+        organizationName
+        mode
+      }
+    }
+  }
+}
+
+query ONE_JOB {
+  oneJob(
+    id: "clk82ihs9003fp5s1ekdyn4lg"
+    slug: "job-artist-2023-07-18t090404232z"
+  ) {
+    category
+    isInternal
+    isPaid
+    maxAge
+    minAge
+    mode
+    organizationName
+    summary
+    talent
+    title
+    employment
+    experienceLevel
+  }
+}
+
+mutation UPDATE_JOB {
+  updateJob(data: { organizationName: "PMT", mode: REMOTE, id: "" }) {
+    id
+    createdAt
+  }
+}
+
+# query ALL_WALLET {
+#   allWalletDeposits(orderBy: { direction: asc, field: createdAt }) {
+#     totalCount
+#     edges {
+#       node {
+#         id
+#         amount
+#       }
+#     }
+#   }
+# }
+
+
+
+
+Query Var
+{
+    "email": "rigak44461@semonir.com"
+}
+
+Http Headers
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbGs4MGdwYzUwMDI2cDVzMWpxNjNqMWlsIiwiaWF0IjoxNjg5NjcwMTAzLCJleHAiOjE2ODk3NTY1MDN9.ER6-RC03WClBgM2NVV3n02Xg6e_9DserH0aBylq1gaE"
+}

@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="row">
+        <header>
+            <img src="../../assets/BMI-logo.png" alt="">
+                Sign Up
+        </header>
+
+        <form #signUpForm="ngForm" (ngSubmit) = "submit(signUpForm)" class="form" action="" >
+            <h2>
+            <fa-icon [icon]="faCoffee"> </fa-icon>
+            Start Your Free Trial
+            </h2>
+            <ul>
+                <li>
+                    15-day trial</li>
+                <li>No credit card required</li>
+            </ul>
+
+            <div class="form-input">
+                <div class="w-50">
+                    <div class="input-group">
+                        <label for="firstname">First name: {{fname}}</label>
+                        <input #firstname="ngModel" minlength="3" required type="text" name="fname" id="firstname" [(ngModel)]="fname">
+                        <div *ngIf = "firstname.touched && firstname.invalid" class="alert alert-danger" >
+                            First name is required
+                            <!-- <div *ngIf = "fname.errors['required']">
+                                First name is required
+                            </div>
+                            <div *ngIf = "fname.errors['minlength']">
+                                First name is invalid
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="lastname">Last name: {{lname}}</label>
+                        <input #lastname="ngModel" minlength="3" required type="text" name="lname" id="lastname" [(ngModel)]="lname">
+                        <div *ngIf = "lastname.touched && lastname.invalid" class="alert alert-danger" >
+                            Last name is required
+                            <!-- <div *ngIf = "lastname.errors?.required">
+                                Last name is required
+                            </div> -->
+                            <!-- <div *ngIf = "lastname.errors?.minlength">
+                                Last name is invalid
+                            </div> -->
+                        </div>
+                    </div>
+                </div>                              
+
+                <div class="input-group">
+                    <label for="company-name">Company name</label>
+                    <input type="text" name="company-name" id="company-name" ngModel>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Work email: {{workemail}}</label>
+                    <input #email="ngModel" email required type="email" name="workemail" id="email" [(ngModel)]="workemail">
+                    <div *ngIf = "email.touched && email.invalid" class="alert alert-danger" >
+                        Email is required
+                        <!-- <div *ngIf = "email.errors?.required">
+                            Email is required
+                        </div>
+                        <div *ngIf = "email.errors?.email">
+                            Email is invalid
+                        </div> -->
+                        
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" ngModel>
+                    <p class="passInfo">At least 8 characters</p>
+                </div>
+
+                <div class="input-group" >
+                    <label for="phone-number"> Phone number (optional)</label>
+                    <div class="phone-number-div">
+                        <select name="phone-number" id="phone-number" [ngModel]="defaultCountry">
+                            <option value="USA" >
+                                <div class="usa">
+
+                                </div>
+                            </option> 
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Gambia" >Gambia</option>
+                            <option value="">Choose...</option>
+                        </select>
+                        <input type="text" name="" id="">
+                    </div>
+                </div>    
+                
+                <div class="checkbox-div">
+                    <label for="">Form is valid</label>
+                    <input type="checkbox" name="" id="" [checked]="signUpForm.valid">  
+                </div>
+
+                <div>
+                    <input type="submit" value="Get Your Account">               
+                </div>
+
+            </div>
+
+            <p class="privacy">By clicking this button, you agree to our Terms, Privacy Policy and Security Policy </p>
+
+        </form>
+
+    </div>
+
+</div>
